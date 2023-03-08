@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <h2>{{data.race_name}}</h2>
+    <!-- date -->
+</section>
+<section>
+    <table>
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Driver</th>
+                <th>Constructor</th>
+                <th>Grid Position</th>
+                <th>Laps</th>
+                <th>Fastest Lap</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in data.results %}
+            <tr>
+                <td>{{d.position}}</td>
+                <td>{{d.driver.given_name + " " + d.driver.family_name}}</td>
+                <td>{{d.constructor.name}}</td>
+                <td>{{d.grid}}</td>
+                <td>{{d.laps}}</td>
+                <td>{{d.fastest_lap.time}}</td>
+                <td>{{d.points}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

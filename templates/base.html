@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>F1 Scoreboard</title>
+    <meta charset="UTF-8">
+    <link href="{{url_for('static', path='style.css')}}" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h3>F1</h3>
+        <p>Time()</p>
+    </header>
+    <article>
+        {% block content %}{% endblock %}
+    </article>
+</body>
+
+</html>
