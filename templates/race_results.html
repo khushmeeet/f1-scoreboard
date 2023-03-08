@@ -2,7 +2,6 @@
 {% block content %}
 <section class="section-header">
     <h2>{{race.race_name}}</h2>
-    <!-- date -->
 </section>
 <section class="section-detail">
     <table>
@@ -26,18 +25,19 @@
                 <td>{{d.driver.given_name + " " + d.driver.family_name}}</td>
                 <td>{{d.constructor.name}}</td>
 
-                {% if d.grid-d.position < 0 %} <td>{{d.grid}}(↓{{(d.grid-d.position)|abs}})</td>
+                {% if d.grid-d.position < 0 %} <td>{{d.grid}}<span>(↓{{(d.grid-d.position)|abs}})</span>
+                    </td>
                     {% elif (d.grid-d.position) == 0 %}
-                    <td>{{d.grid}}({{d.grid-d.position}})</td>
+                    <td>{{d.grid}}</td>
                     {% else %}
-                    <td>{{d.grid}}(↑{{d.grid-d.position}})</td>
+                    <td>{{d.grid}}<span>(↑{{d.grid-d.position}})</span></td>
                     {% endif %}
 
                     <td>{{d.laps}}</td>
 
                     {% if d.fastest_lap.rank == 1 %}
                     <td>
-                        <span class="fastest-lap">{{d.fastest_lap.time|laptime_format}}</span>
+                        <span class="green">{{d.fastest_lap.time|laptime_format}}</span>
                     </td>
                     {% else %}
                     <td>{{d.fastest_lap.time|laptime_format}}</td>

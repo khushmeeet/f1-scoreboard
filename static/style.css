@@ -16,14 +16,35 @@ header {
     justify-content: space-evenly;
 }
 
-#title-text {
-    font-weight: bold;
-    font-style: italic;
-}
-
 .header-option {
     /* font-size: small; */
     color: #45454A;
+    font-size: small;
+}
+
+a:link {
+    text-decoration: none;
+    color: #45454A;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #45454A;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #45454A;
+}
+
+a:active {
+    text-decoration: underline;
+    color: #45454A;
+}
+
+#title-text {
+    font-weight: bold;
+    font-style: italic;
 }
 
 .horizontal-line {
@@ -41,15 +62,15 @@ header {
     margin: 2em 0 0.5em 0;
 }
 
-.section-detail table  {
+.section-detail table {
     margin-left: auto;
     margin-right: auto;
-    font-size: 0.9em;
     border-collapse: separate;
     border-spacing: 12px 3px;
+    font-size: small;
 }
 
-.section-detail table:not(:first-child)  {
+.section-detail table:not(:first-child) {
     margin-top: 2em;
 }
 
@@ -58,6 +79,6 @@ header {
     text-align: left;
 }
 
-.fastest-lap {
+.green {
     background-color: #66C95B;
 }
