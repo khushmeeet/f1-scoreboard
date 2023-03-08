@@ -11,7 +11,7 @@
                 <th>Position</th>
                 <th>Driver</th>
                 <th>Constructor</th>
-                <th>Grid Position</th>
+                <th>Grid Pos</th>
                 <th>Laps</th>
                 <th>Fastest Lap</th>
                 <th>Points</th>
@@ -26,11 +26,13 @@
                 <td>{{d.grid}}</td>
                 <td>{{d.laps}}</td>
                 {% if d.fastest_lap.rank == 1 %}
-                <td class="fastest-lap">{{d.fastest_lap.time}}</td>
+                <td>
+                    <span class="fastest-lap">{{d.fastest_lap.time|laptime_format}}</span>
+                </td>
                 {% else %}
-                <td>{{d.fastest_lap.time}}</td>
+                <td>{{d.fastest_lap.time|laptime_format}}</td>
                 {% endif %}
-                <td>{{d.points}}</td>
+                <td>{{d.points|int}}</td>
             </tr>
             {% endfor %}
         </tbody>

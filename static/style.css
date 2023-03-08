@@ -1,6 +1,8 @@
 /* base.html */
 body {
     font-family: "Berkeley Mono";
+    /* background-color: black;
+    color: white; */
 }
 
 #content {
@@ -59,13 +61,6 @@ tbody:before {
     color: white;
     /* bacground color */
     display: block;
-}
-
-td,
-th {
-    /* margin: 3px 20px 3px 0px; */
-    border-collapse: separate;
-    border-spacing: 10px 10px;
 }
 
 .fastest-lap {

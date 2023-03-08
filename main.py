@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
-from filters import datetime_format
+from filters import datetime_format, laptime_format
 
 
 app = FastAPI()
@@ -12,6 +12,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 templates.env.globals['now'] = datetime.now(timezone.utc).astimezone()
 templates.env.filters["datetime_format"] = datetime_format
+templates.env.filters["laptime_format"] = laptime_format
 e = ergast_py.Ergast()
 
 
