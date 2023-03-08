@@ -25,7 +25,11 @@
                 <td>{{d.constructor.name}}</td>
                 <td>{{d.grid}}</td>
                 <td>{{d.laps}}</td>
+                {% if d.fastest_lap.rank == 1 %}
+                <td class="fastest-lap">{{d.fastest_lap.time}}</td>
+                {% else %}
                 <td>{{d.fastest_lap.time}}</td>
+                {% endif %}
                 <td>{{d.points}}</td>
             </tr>
             {% endfor %}

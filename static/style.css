@@ -35,14 +35,21 @@ header {
     text-align: center;
 }
 
+.section-header h2 {
+    margin: 2em 0 0.5em 0;
+}
+
 .section-detail table {
     margin-left: auto;
     margin-right: auto;
     font-size: 0.9em;
+    border-collapse: separate;
+    border-spacing: 20px 3px;
 }
 
 .section-detail table thead {
     margin-bottom: 10px;
+    text-align: left;
 }
 
 tbody:before {
@@ -54,6 +61,13 @@ tbody:before {
     display: block;
 }
 
-td {
-    padding: 3px 5px;
+td,
+th {
+    /* margin: 3px 20px 3px 0px; */
+    border-collapse: separate;
+    border-spacing: 10px 10px;
+}
+
+.fastest-lap {
+    background-color: #66C95B;
 }
