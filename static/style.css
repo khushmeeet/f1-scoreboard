@@ -54,15 +54,6 @@ header {
     text-align: left;
 }
 
-tbody:before {
-    /* This doesn't work because of border-collapse */
-    line-height: 0.3em;
-    content: ".";
-    color: white;
-    /* bacground color */
-    display: block;
-}
-
 .fastest-lap {
     background-color: #66C95B;
 }

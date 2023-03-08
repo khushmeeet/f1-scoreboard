@@ -14,6 +14,8 @@
                 <th>Grid Pos</th>
                 <th>Laps</th>
                 <th>Fastest Lap</th>
+                <!-- <th>Interval</th> -->
+                <th>Status</th>
                 <th>Points</th>
             </tr>
         </thead>
@@ -23,16 +25,27 @@
                 <td>{{d.position}}</td>
                 <td>{{d.driver.given_name + " " + d.driver.family_name}}</td>
                 <td>{{d.constructor.name}}</td>
-                <td>{{d.grid}}</td>
-                <td>{{d.laps}}</td>
-                {% if d.fastest_lap.rank == 1 %}
-                <td>
-                    <span class="fastest-lap">{{d.fastest_lap.time|laptime_format}}</span>
-                </td>
-                {% else %}
-                <td>{{d.fastest_lap.time|laptime_format}}</td>
-                {% endif %}
-                <td>{{d.points|int}}</td>
+
+                {% if d.grid-d.position < 0 %} <td>{{d.grid}}(↓{{(d.grid-d.position)|abs}})</td>
+                    {% elif (d.grid-d.position) == 0 %}
+                    <td>{{d.grid}}({{d.grid-d.position}})</td>
+                    {% else %}
+                    <td>{{d.grid}}(↑{{d.grid-d.position}})</td>
+                    {% endif %}
+
+                    <td>{{d.laps}}</td>
+
+                    {% if d.fastest_lap.rank == 1 %}
+                    <td>
+                        <span class="fastest-lap">{{d.fastest_lap.time|laptime_format}}</span>
+                    </td>
+                    {% else %}
+                    <td>{{d.fastest_lap.time|laptime_format}}</td>
+                    {% endif %}
+
+                    <!-- <td>{{d.time.time}}</td> -->
+                    <td>{{d.status|race_status}}</td>
+                    <td>{{d.points|int}}</td>
             </tr>
             {% endfor %}
         </tbody>
