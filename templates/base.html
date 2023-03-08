@@ -14,13 +14,13 @@
                 <a href="{{url_for('race_schedule')}}">Schedule</a>
             </div>
             <div class="header-option" style="flex-grow:2">
-                <a href="">Drivers</a>
+                <a href="{{url_for('drivers')}}">Drivers</a>
             </div>
             <div style="flex-grow:4" id="title-text">
                 <a href="{{url_for('race_results')}}">F1</a>
             </div>
             <div class="header-option" style="flex-grow:2">
-                <a href="">Constructors</a>
+                <a href="{{url_for('constructors')}}">Constructors</a>
             </div>
             <div class="header-option" style="flex-grow:2">
                 {{now|datetime_format}}

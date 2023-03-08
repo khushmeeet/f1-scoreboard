@@ -59,3 +59,19 @@ async def race_schedule(req: Request, httpx_c=Depends(client)):
     return templates.TemplateResponse(
         "schedule.html", {"request": req, "schedule": schedule}
     )
+
+
+@app.get("/drivers", response_class=HTMLResponse)
+async def drivers(req: Request):
+    drivers = e.season().get_driver_standings()
+    return templates.TemplateResponse(
+        "drivers.html", {"request": req, "drivers": drivers}
+    )
+
+
+@app.get("/constructors", response_class=HTMLResponse)
+async def constructors(req: Request):
+    constructors = e.season().get_constructor_standings()
+    return templates.TemplateResponse(
+        "constructors.html", {"request": req, "constructors": constructors}
+    )
