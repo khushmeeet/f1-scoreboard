@@ -1,4 +1,5 @@
 import datetime
+from pydantic.fields import Undefined
 
 
 def datetime_format(value: datetime.datetime, format: str = "%d-%m-%y") -> str:
@@ -7,6 +8,12 @@ def datetime_format(value: datetime.datetime, format: str = "%d-%m-%y") -> str:
 
 def laptime_format(value: datetime.datetime, format: str = "%M:%S.%f") -> str:
     return value.strftime(format)[1:-3]
+
+
+def combine_date_time(
+    date: datetime.datetime, time: datetime.time
+) -> datetime.datetime:
+    return datetime.datetime.combine(date, time)
 
 
 def race_status_str(value: int) -> str:
