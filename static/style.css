@@ -1,8 +1,59 @@
 /* base.html */
 body {
     font-family: "Berkeley Mono";
-    margin: 1.5rem;
+}
+
+#content {
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 header {
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#title-text {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.header-option {
+    /* font-size: small; */
+    color: #45454A;
+}
+
+.horizontal-line {
+    margin-top: 0.3rem;
+    border-top: 2px solid #45454A;
+    border-radius: 0;
+}
+
+/* race_results.html */
+.section-header {
+    text-align: center;
+}
+
+.section-detail table {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.9em;
+}
+
+.section-detail table thead {
+    margin-bottom: 10px;
+}
+
+tbody:before {
+    /* This doesn't work because of border-collapse */
+    line-height: 0.3em;
+    content: ".";
+    color: white;
+    /* bacground color */
+    display: block;
+}
+
+td {
+    padding: 3px 5px;
 }

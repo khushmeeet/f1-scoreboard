@@ -8,13 +8,23 @@
 </head>
 
 <body>
-    <header>
-        <h3>F1</h3>
-        <p>Time()</p>
-    </header>
-    <article>
-        {% block content %}{% endblock %}
-    </article>
+    <div id="content">
+        <header>
+            <div class="header-option" style="flex-grow:2">
+                Live
+            </div>
+            <div style="flex-grow:4" id="title-text">
+                F1
+            </div>
+            <div class="header-option" style="flex-grow:2">
+                {{now|datetime_format}}
+            </div>
+        </header>
+        <hr class="horizontal-line">
+        <article>
+            {% block content %}{% endblock %}
+        </article>
+    </div>
 </body>
 
 </html>
