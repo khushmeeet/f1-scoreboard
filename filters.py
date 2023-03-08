@@ -1,12 +1,15 @@
-def datetime_format(value, format="%d-%m-%y"):
+import datetime
+
+
+def datetime_format(value: datetime.datetime, format: str = "%d-%m-%y") -> str:
     return value.strftime(format)
 
 
-def laptime_format(value, format="%M:%S.%f"):
+def laptime_format(value: datetime.datetime, format: str = "%M:%S.%f") -> str:
     return value.strftime(format)[1:-3]
 
 
-def race_status_str(value) -> str:
+def race_status_str(value: int) -> str:
     status = {
         0: "",
         1: "Finished",

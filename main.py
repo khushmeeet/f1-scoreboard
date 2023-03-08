@@ -24,8 +24,8 @@ e = ergast_py.Ergast()
 
 @app.get("/", response_class=HTMLResponse)
 async def race_results(req: Request):
-    data = e.season().round().get_results()
-    print(data)
+    race = e.season().round().get_results()
+    quali = e.season().round().get_qualifyings()
     return templates.TemplateResponse(
-        "race_results.html", {"request": req, "data": data[0]}
+        "race_results.html", {"request": req, "race": race[0], "quali": quali[0]}
     )

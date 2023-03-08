@@ -41,12 +41,16 @@ header {
     margin: 2em 0 0.5em 0;
 }
 
-.section-detail table {
+.section-detail table  {
     margin-left: auto;
     margin-right: auto;
     font-size: 0.9em;
     border-collapse: separate;
-    border-spacing: 20px 3px;
+    border-spacing: 12px 3px;
+}
+
+.section-detail table:not(:first-child)  {
+    margin-top: 2em;
 }
 
 .section-detail table thead {

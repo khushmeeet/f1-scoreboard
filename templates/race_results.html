@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="section-header">
-    <h2>{{data.race_name}}</h2>
+    <h2>{{race.race_name}}</h2>
     <!-- date -->
 </section>
 <section class="section-detail">
     <table>
         <thead>
             <tr>
-                <th>Position</th>
+                <th>Pos</th>
                 <th>Driver</th>
                 <th>Constructor</th>
                 <th>Grid Pos</th>
@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for d in data.results %}
+            {% for d in race.results %}
             <tr>
                 <td>{{d.position}}</td>
                 <td>{{d.driver.given_name + " " + d.driver.family_name}}</td>
@@ -46,6 +46,45 @@
                     <!-- <td>{{d.time.time}}</td> -->
                     <td>{{d.status|race_status}}</td>
                     <td>{{d.points|int}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Pos</th>
+                <th>Driver</th>
+                <th>Constructor</th>
+                <th>Quali 1</th>
+                <th>Quali 2</th>
+                <th>Quali 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in quali.qualifying_results %}
+            <tr>
+                <td>{{d.position}}</td>
+                <td>{{d.driver.given_name + " " + d.driver.family_name}}</td>
+                <td>{{d.constructor.name}}</td>
+                {% if d.qual_1 == None %}
+                <td></td>
+                {% else %}
+                <td>{{d.qual_1|laptime_format}}</td>
+                {% endif %}
+
+                {% if d.qual_2 == None %}
+                <td></td>
+                {% else %}
+                <td>{{d.qual_2|laptime_format}}</td>
+                {% endif %}
+
+                {% if d.qual_3 == None %}
+                <td></td>
+                {% else %}
+                <td>{{d.qual_3|laptime_format}}</td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
