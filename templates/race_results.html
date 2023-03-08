@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="section-header">
-    <h2>{{race.race_name}}</h2>
+    <h2>{{race.race_name}} - Race</h2>
 </section>
 <section class="section-detail">
     <table>
@@ -51,6 +51,9 @@
         </tbody>
     </table>
 
+    <section class="section-header">
+        <h2>{{race.race_name}} - Qualifying</h2>
+    </section>
     <table>
         <thead>
             <tr>

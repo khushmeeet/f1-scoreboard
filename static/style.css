@@ -49,8 +49,9 @@ a:active {
 
 .horizontal-line {
     margin-top: 0.3rem;
-    border-top: 2px solid #45454A;
+    border-top: 1px solid #45454A;
     border-radius: 0;
+    border-style: none solid dashed dashed;
 }
 
 /* race_results.html */
@@ -68,10 +69,6 @@ a:active {
     border-collapse: separate;
     border-spacing: 12px 3px;
     font-size: small;
-}
-
-.section-detail table:not(:first-child) {
-    margin-top: 2em;
 }
 
 .section-detail table thead {

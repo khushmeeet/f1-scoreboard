@@ -11,10 +11,16 @@
     <div id="content">
         <header>
             <div class="header-option" style="flex-grow:2">
-                Live
+                <a href="{{url_for('race_schedule')}}">Schedule</a>
+            </div>
+            <div class="header-option" style="flex-grow:2">
+                <a href="">Drivers</a>
             </div>
             <div style="flex-grow:4" id="title-text">
-                F1
+                <a href="{{url_for('race_results')}}">F1</a>
+            </div>
+            <div class="header-option" style="flex-grow:2">
+                <a href="">Constructors</a>
             </div>
             <div class="header-option" style="flex-grow:2">
                 {{now|datetime_format}}
