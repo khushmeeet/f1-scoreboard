@@ -13,6 +13,8 @@ from utils import get_schedule
 
 # TODO:
 #   Add time interval
+#   Implement Cache
+#   Fix https issue
 
 
 app = FastAPI()
