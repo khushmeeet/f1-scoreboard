@@ -1,4 +1,12 @@
 /* base.html */
+@font-face {
+    font-family: "Berkley Mono";
+    src: url("fonts/BerkeleyMono-Bold.ttf");
+    src: url("fonts/BerkeleyMono-BoldItalic.ttf");
+    src: url("fonts/BerkeleyMono-Italic.ttf");
+    src: url("fonts/BerkeleyMono-Regular.ttf");
+}
+
 body {
     font-family: "Berkeley Mono";
     /* background-color: black;
