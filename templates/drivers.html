@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% import "section-header.html" as sh %}
 {% block content %}
-<section class="section-header">
-    <h2>Driver Standings</h2>
-</section>
-<section class="section-detail">
-    <table>
+
+{{ sh.section_header("Driver Standings") }}
+
+<section class="flex flex-col justify-center">
+    <table class="text-sm table-fixed mx-auto text-left" style="border-collapse: separate;
+    border-spacing: 12px 3px;">
         <thead>
             <tr>
                 <th>Pos</th>
