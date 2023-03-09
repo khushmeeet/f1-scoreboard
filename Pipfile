@@ -7,6 +7,8 @@ name = "pypi"
 fastapi = "*"
 jinja2 = "*"
 ergast-py = "*"
+uvicorn = "*"
+httpx = "*"
 
 [dev-packages]
 
