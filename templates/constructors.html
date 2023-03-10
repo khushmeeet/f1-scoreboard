@@ -19,7 +19,9 @@
             {% for d in constructors[-1].constructor_standings %}
             <tr>
                 <td>{{d.position}}</td>
-                <td>{{d.constructor.name}}</td>
+                <td><a
+                        href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">{{d.constructor.name}}</a>
+                </td>
                 <td>{{d.wins}}</td>
                 <td>{{d.points}}</td>
             </tr>

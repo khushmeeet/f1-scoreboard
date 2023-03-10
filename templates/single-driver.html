@@ -2,7 +2,8 @@
 {% import "section-header.html" as sh %}
 {% block content %}
 
-{{ sh.section_header(driver[0].results[0].driver.given_name + " " + driver[0].results[0].driver.family_name) }}
+{{ sh.section_header(driver[0].results[0].driver.given_name + " " + driver[0].results[0].driver.family_name + " | " +
+driver[0].results[0].constructor.name) }}
 
 <section class="flex flex-col justify-center">
     <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;

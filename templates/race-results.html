@@ -29,7 +29,9 @@
                         {{d.driver.given_name + " " + d.driver.family_name}}
                     </a>
                 </td>
-                <td><a href="{{d.constructor.constructorId}}">{{d.constructor.name}}</a></td>
+                <td><a
+                        href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">{{d.constructor.name}}</a>
+                </td>
 
                 {% if d.grid-d.position < 0 %} <td>{{d.grid}}<span>(↓{{(d.grid-d.position)|abs}})</span>
                     </td>
@@ -80,7 +82,9 @@
                         {{d.driver.given_name + " " + d.driver.family_name}}
                     </a>
                 </td>
-                <td><a href="">{{d.constructor.name}}</a></td>
+                <td><a
+                        href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">{{d.constructor.name}}</a>
+                </td>
                 {% if d.qual_1 == None %}
                 <td></td>
                 {% else %}

@@ -20,8 +20,11 @@
             {% for d in drivers[-1].driver_standings %}
             <tr>
                 <td>{{d.position}}</td>
-                <td>{{d.driver.given_name + " " + d.driver.family_name}}</td>
-                <td>{{d.constructors[0].name}}</td>
+                <td><a href="{{url_for('driver', driver_id=d.driver.driver_id)}}">{{d.driver.given_name + " " +
+                        d.driver.family_name}}</a></td>
+                <td><a
+                        href="{{url_for('constructor', constructor_id=d.constructors[0].constructor_id)}}">{{d.constructors[0].name}}</a>
+                </td>
                 <td>{{d.wins}}</td>
                 <td>{{d.points}}</td>
             </tr>

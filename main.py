@@ -58,9 +58,8 @@ def ergast_results(*args):
 async def race_results(req: Request):
     race = ergast_results("season", "round", "get_results")
     quali = ergast_results("season", "round", "get_qualifyings")
-    print(quali)
     return templates.TemplateResponse(
-        "race_results.html", {"request": req, "race": race[0], "quali": quali[0]}
+        "race-results.html", {"request": req, "race": race[0], "quali": quali[0]}
     )
 
 
@@ -96,4 +95,14 @@ async def constructors(req: Request):
     constructors = ergast_results("season", "get_constructor_standings")
     return templates.TemplateResponse(
         "constructors.html", {"request": req, "constructors": constructors}
+    )
+
+
+@app.get("/constructors/{constructor_id}", response_class=HTMLResponse)
+async def constructor(req: Request, constructor_id: str):
+    constructor_details = ergast_results(
+        "season", ("constructor", (constructor_id,)), "get_constructor_standings"
+    )
+    return templates.TemplateResponse(
+        "single-constructor.html", {"request": req, "constructor": constructor_details}
     )
