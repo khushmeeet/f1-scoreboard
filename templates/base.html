@@ -5,31 +5,34 @@
     <title>F1 Scoreboard</title>
     <meta charset="UTF-8">
     <!-- Temporary solution -->
-    <!-- <link href="{{url_for('static', path='style.css')}}" rel="stylesheet"> -->
-    <link href="https://f1-scoreboard.fly.dev/static/style.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="{{url_for('static', path='style.css')}}" rel="stylesheet">
+    <!-- <link href="https://f1-scoreboard.fly.dev/static/style.css" rel="stylesheet"> -->
 </head>
 
-<body>
-    <div id="content">
-        <header>
-            <div class="header-option" style="flex-grow:2">
+<body class="container mx-auto">
+    <div>
+        <header class="flex flex-row text-center mt-2.5">
+            <div class="basis-1/4">
+            </div>
+            <div class="basis-1/4 text-sm text-slate-700">
                 <a href="{{url_for('race_schedule')}}">Schedule</a>
             </div>
-            <div class="header-option" style="flex-grow:2">
+            <div class="basis-1/4 text-sm text-slate-700">
                 <a href="{{url_for('drivers')}}">Drivers</a>
             </div>
-            <div style="flex-grow:4" id="title-text">
+            <div class="basis-1/4 font-bold italic">
                 <a href="{{url_for('race_results')}}">F1</a>
             </div>
-            <div class="header-option" style="flex-grow:2">
+            <div class="basis-1/4 text-sm text-slate-700">
                 <a href="{{url_for('constructors')}}">Constructors</a>
             </div>
-            <div class="header-option" style="flex-grow:2">
+            <div class="basis-1/4 text-sm text-slate-700">
                 {{now|datetime_format}}
             </div>
+            <div class="basis-1/4">
+            </div>
         </header>
-        <hr class="horizontal-line">
+        <hr class="border border-black border-dashed w-3/4 m-auto">
         <article>
             {% block content %}{% endblock %}
         </article>

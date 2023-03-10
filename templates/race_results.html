@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% import "section-header.html" as sh %}
 {% block content %}
-<section class="section-header">
-    <h2>{{race.race_name}} - Race</h2>
-</section>
-<section class="section-detail">
-    <table>
+
+{{ sh.section_header(race.race_name + " - Race") }}
+
+<section class="flex flex-col justify-center">
+    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
+    border-spacing: 12px 3px;">
         <thead>
             <tr>
                 <th>Pos</th>
@@ -37,7 +39,7 @@
 
                     {% if d.fastest_lap.rank == 1 %}
                     <td>
-                        <span class="green">{{d.fastest_lap.time|laptime_format}}</span>
+                        <span class="bg-green-400">{{d.fastest_lap.time|laptime_format}}</span>
                     </td>
                     {% else %}
                     <td>{{d.fastest_lap.time|laptime_format}}</td>
@@ -51,11 +53,11 @@
         </tbody>
     </table>
 
-    <section class="section-header">
-        <h2>{{race.race_name}} - Qualifying</h2>
-    </section>
-    <table>
-        <thead>
+    {{ sh.section_header(race.race_name + " - Qualifying") }}
+
+    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
+    border-spacing: 12px 3px;">
+        <thead class="text-left">
             <tr>
                 <th>Pos</th>
                 <th>Driver</th>

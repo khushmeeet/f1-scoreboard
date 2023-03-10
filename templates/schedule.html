@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% import "section-header.html" as sh %}
 {% block content %}
-<section class="section-header">
-    <h2>{{schedule.raceTable.season}} Schedule</h2>
-</section>
-<section class="section-detail">
-    <table>
+
+{{ sh.section_header(schedule.raceTable.season|string + " Season") }}
+
+<section class="flex flex-col justify-center">
+    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
+    border-spacing: 12px 3px;">
         <thead>
             <tr>
                 <th>Round</th>
@@ -25,31 +27,36 @@
                 <td>{{d.raceName}}</td>
                 <td>{{d.circuit.location.locality + ", " + d.circuit.location.country}}</td>
                 {% if d.fp1 %}
-                <td>{{d.fp1.date|combine_date_time(d.fp1.time)|datetime_format("%d-%m-%y %I:%M %p")}}</td>
+                <td>{{d.fp1.date|combine_date_time(d.fp1.time)|datetime_format("%d-%m-%y %I:%M %p")}}
+                </td>
                 {% else %}
                 <td></td>
                 {% endif %}
 
                 {% if d.fp2 %}
-                <td>{{d.fp2.date|combine_date_time(d.fp2.time)|datetime_format("%d-%m-%y %I:%M %p")}}</td>
+                <td>{{d.fp2.date|combine_date_time(d.fp2.time)|datetime_format("%d-%m-%y %I:%M %p")}}
+                </td>
                 {% else %}
                 <td></td>
                 {% endif %}
 
                 {% if d.fp3 %}
-                <td>{{d.fp3.date|combine_date_time(d.fp3.time)|datetime_format("%d-%m-%y %I:%M %p")}}</td>
+                <td>{{d.fp3.date|combine_date_time(d.fp3.time)|datetime_format("%d-%m-%y %I:%M %p")}}
+                </td>
                 {% else %}
                 <td></td>
                 {% endif %}
 
                 {% if d.sprint %}
-                <td>{{d.sprint.date|combine_date_time(d.sprint.time)|datetime_format("%d-%m-%y %I:%M %p")}}</td>
+                <td>{{d.sprint.date|combine_date_time(d.sprint.time)|datetime_format("%d-%m-%y %I:%M
+                    %p")}}</td>
                 {% else %}
                 <td></td>
                 {% endif %}
 
                 {% if d.quali %}
-                <td>{{d.quali.date|combine_date_time(d.quali.time)|datetime_format("%d-%m-%y %I:%M %p")}}</td>
+                <td>{{d.quali.date|combine_date_time(d.quali.time)|datetime_format("%d-%m-%y %I:%M %p")}}
+                </td>
                 {% else %}
                 <td></td>
                 {% endif %}

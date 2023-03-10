@@ -1,0 +1,12 @@
+{
+  "name": "f1-scoreboard",
+  "version": "1.0.0",
+  "description": "Formula1 scoreboard",
+  "main": "index.js",
+  "repository": "https://github.com/khushmeeet/f1-scoreboard.git",
+  "author": "Khushmeet Singh <khushmeetsingh1996@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "tailwindcss": "^3.2.7"
+  }
+}
