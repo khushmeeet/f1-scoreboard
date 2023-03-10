@@ -134,3 +134,4 @@ dmypy.json
 #project
 static/fonts
 node_modules/
+cache/

@@ -5,7 +5,9 @@ import httpx_cache
 class HTTPXClient:
     def start(self):
         self.client = httpx.AsyncClient(
-            transport=httpx_cache.CacheControlTransport(cache=httpx_cache.DictCache())
+            transport=httpx_cache.AsyncCacheControlTransport(
+                cache=httpx_cache.FileCache("./cache")
+            )
         )
 
     async def stop(self):

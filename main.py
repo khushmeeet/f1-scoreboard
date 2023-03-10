@@ -9,7 +9,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from httpx_client import HTTPXClient
 from filters import datetime_format, laptime_format, race_status_str, combine_date_time
-from consts import RACE_SCHEDULE_URL
 from utils import get_schedule
 
 # TODO:
@@ -57,7 +56,8 @@ def ergast_results(*args):
 @app.get("/", response_class=HTMLResponse)
 async def race_results(req: Request):
     race = ergast_results("season", "round", "get_results")
-    quali = ergast_results("season", "round", "get_qualifying")
+    quali = ergast_results("season", "round", "get_qualifyings")
+    print(quali)
     return templates.TemplateResponse(
         "race_results.html", {"request": req, "race": race[0], "quali": quali[0]}
     )
@@ -75,7 +75,7 @@ async def race_schedule(req: Request, httpx_c=Depends(client)):
 
 @app.get("/drivers", response_class=HTMLResponse)
 async def drivers(req: Request):
-    drivers = ergast_results("season", "get_driver_standings()")
+    drivers = ergast_results("season", "get_driver_standings")
     return templates.TemplateResponse(
         "drivers.html", {"request": req, "drivers": drivers}
     )
@@ -83,7 +83,7 @@ async def drivers(req: Request):
 
 @app.get("/constructors", response_class=HTMLResponse)
 async def constructors(req: Request):
-    constructors = ergast_results("season", "get_constructor_standings()")
+    constructors = ergast_results("season", "get_constructor_standings")
     return templates.TemplateResponse(
         "constructors.html", {"request": req, "constructors": constructors}
     )
