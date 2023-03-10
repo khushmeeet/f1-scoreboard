@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "section-header.html" as sh %}
+{% block content %}
+
+{{ sh.section_header(driver[0].results[0].driver.given_name + " " + driver[0].results[0].driver.family_name) }}
+
+<section class="flex flex-col justify-center">
+    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
+    border-spacing: 12px 3px;">
+        <thead>
+            <tr>
+                <th>Round</th>
+                <th>Race</th>
+                <th>Date</th>
+                <th>Pos</th>
+                <th>Points</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in driver %}
+            <tr>
+                <td>{{d.round_no}}</td>
+                <td>{{d.race_name}}</td>
+                <td>{{d.date|datetime_format("%d-%m-%y %I:%M %p")}}</td>
+                <td>{{d.results[0].position}}</td>
+                <td>{{d.results[0].points|int}}</td>
+                <th>{{d.results[0].status|race_status}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}

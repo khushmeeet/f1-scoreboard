@@ -49,6 +49,7 @@ def ergast_results(*args):
             result = getattr(result, arg)()
         else:
             method_name, method_args = arg
+            print(method_name, method_args)
             result = getattr(result, method_name)(*method_args)
     return result
 
@@ -78,6 +79,15 @@ async def drivers(req: Request):
     drivers = ergast_results("season", "get_driver_standings")
     return templates.TemplateResponse(
         "drivers.html", {"request": req, "drivers": drivers}
+    )
+
+
+@app.get("/drivers/{driver_id}", response_class=HTMLResponse)
+async def driver(req: Request, driver_id: str):
+    driver_details = ergast_results("season", ("driver", (driver_id,)), "get_results")
+    return templates.TemplateResponse(
+        "single-driver.html",
+        {"request": req, "driver": driver_details},
     )
 
 
