@@ -9,6 +9,7 @@ jinja2 = "*"
 ergast-py = "*"
 uvicorn = "*"
 httpx = "*"
+httpx-cache = "*"
 
 [dev-packages]
 

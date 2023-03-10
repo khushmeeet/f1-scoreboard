@@ -1,4 +1,5 @@
 import json
+from functools import lru_cache
 from datetime import datetime, timezone
 import ergast_py
 from fastapi import FastAPI, Request
@@ -13,9 +14,9 @@ from utils import get_schedule
 
 # TODO:
 #   Add time interval
-#   Implement Cache
 #   Fix https issue
 
+RACE_SCHEDULE_URL = "http://ergast.com/api/f1/current.json"
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -41,10 +42,22 @@ async def shutdown():
     await client.stop()
 
 
+@lru_cache
+def ergast_results(*args):
+    result = e
+    for arg in args:
+        if isinstance(arg, str):
+            result = getattr(result, arg)()
+        else:
+            method_name, method_args = arg
+            result = getattr(result, method_name)(*method_args)
+    return result
+
+
 @app.get("/", response_class=HTMLResponse)
 async def race_results(req: Request):
-    race = e.season().round().get_results()
-    quali = e.season().round().get_qualifyings()
+    race = ergast_results("season", "round", "get_results")
+    quali = ergast_results("season", "round", "get_qualifying")
     return templates.TemplateResponse(
         "race_results.html", {"request": req, "race": race[0], "quali": quali[0]}
     )
@@ -62,7 +75,7 @@ async def race_schedule(req: Request, httpx_c=Depends(client)):
 
 @app.get("/drivers", response_class=HTMLResponse)
 async def drivers(req: Request):
-    drivers = e.season().get_driver_standings()
+    drivers = ergast_results("season", "get_driver_standings()")
     return templates.TemplateResponse(
         "drivers.html", {"request": req, "drivers": drivers}
     )
@@ -70,7 +83,7 @@ async def drivers(req: Request):
 
 @app.get("/constructors", response_class=HTMLResponse)
 async def constructors(req: Request):
-    constructors = e.season().get_constructor_standings()
+    constructors = ergast_results("season", "get_constructor_standings()")
     return templates.TemplateResponse(
         "constructors.html", {"request": req, "constructors": constructors}
     )
