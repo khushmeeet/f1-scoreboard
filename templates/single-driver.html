@@ -6,6 +6,9 @@
 driver[0].results[0].constructor.name) }}
 
 <section class="flex flex-col justify-center">
+    {% if plot != None %}
+    <pre class="text-xs mx-auto">{{plot}}</pre>
+    {% endif %}
     <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
     border-spacing: 12px 3px;">
         <thead>
@@ -13,7 +16,7 @@ driver[0].results[0].constructor.name) }}
                 <th>Round</th>
                 <th>Race</th>
                 <th>Date</th>
-                <th>Pos</th>
+                <th>Finished</th>
                 <th>Points</th>
                 <th>Status</th>
             </tr>
@@ -26,9 +29,51 @@ driver[0].results[0].constructor.name) }}
                 <td>{{d.date|datetime_format("%d-%m-%y %I:%M %p")}}</td>
                 <td>{{d.results[0].position}}</td>
                 <td>{{d.results[0].points|int}}</td>
-                <th>{{d.results[0].status|race_status}}</th>
+                <td>{{d.results[0].status|race_status}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    {% endblock %}
+
+    <div class="grid gap-1 grid-cols-2 grid-rows-2">
+        {% for year, values in past_year.items() %}
+        <div>
+            <section class="text-xl font-bold mt-10 mb-2">
+                <h2>{{year}}</h2>
+            </section>
+            <div class="table text-xs border border-collapse">
+                <div class="table-header-group">
+                    <div class="table-row font-bold">
+                        <div class="table-cell text-left pl-1 pr-3">Round</div>
+                        <div class="table-cell text-left pl-1 pr-3">Race</div>
+                        <div class="table-cell text-left pl-1 pr-3">Finished</div>
+                        <div class="table-cell text-left pl-1 pr-3">Points</div>
+                        <div class="table-cell text-left pl-1 pr-3">Status</div>
+                    </div>
+                </div>
+                <div class="table-row-group">
+                    {% for d in values %}
+                    <div class="table-row">
+                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">{{d.round_no}}</div>
+                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">{{d.race_name}}</div>
+                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">{{d.results[0].position}}
+                        </div>
+                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">{{d.results[0].points|int}}
+                        </div>
+                        {% if d.results[0].status|race_status != "Finished" %}
+                        <div class="table-cell pl-1 pr-3 border border-black border-dashed"><span
+                                class="bg-red-500">{{d.results[0].status|race_status}}</span>
+                        </div>
+                        {% else %}
+                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">
+                            {{d.results[0].status|race_status}}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

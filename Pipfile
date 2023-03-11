@@ -10,6 +10,7 @@ ergast-py = "*"
 uvicorn = "*"
 httpx = "*"
 httpx-cache = "*"
+asciichartpy = "*"
 
 [dev-packages]
 

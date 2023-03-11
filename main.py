@@ -10,6 +10,7 @@ from fastapi.responses import HTMLResponse
 from httpx_client import HTTPXClient
 from filters import datetime_format, laptime_format, race_status_str, combine_date_time
 from utils import get_schedule
+import asciichartpy
 
 # TODO:
 #   Add time interval
@@ -42,16 +43,20 @@ async def shutdown():
 
 
 @lru_cache
-def ergast_results(*args):
+def ergast_results(*args) -> list:
     result = e
     for arg in args:
         if isinstance(arg, str):
             result = getattr(result, arg)()
         else:
             method_name, method_args = arg
-            print(method_name, method_args)
             result = getattr(result, method_name)(*method_args)
     return result
+
+
+def last_six_seasons() -> list:
+    current_year = datetime.now().year
+    return [i for i in range(current_year - 1, current_year - 7, -1)]
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -84,9 +89,24 @@ async def drivers(req: Request):
 @app.get("/drivers/{driver_id}", response_class=HTMLResponse)
 async def driver(req: Request, driver_id: str):
     driver_details = ergast_results("season", ("driver", (driver_id,)), "get_results")
+    points = [d.results[0].points for d in driver_details]
+    plot = (
+        None
+        if len(points) <= 1
+        else asciichartpy.plot(points, {"height": 8, "format": "{:8.0f}"})
+    )
+    past_year_details = {
+        i: ergast_results(("season", (i,)), ("driver", (driver_id,)), "get_results")
+        for i in last_six_seasons()
+    }
     return templates.TemplateResponse(
         "single-driver.html",
-        {"request": req, "driver": driver_details},
+        {
+            "request": req,
+            "driver": driver_details,
+            "plot": plot,
+            "past_year": past_year_details,
+        },
     )
 
 
