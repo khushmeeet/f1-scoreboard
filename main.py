@@ -66,6 +66,46 @@ def last_six_seasons() -> list:
     return [i for i in range(current_year - 1, current_year - 7, -1)]
 
 
+def total_constructor_points(constructor):
+    constructor_points = {}
+    if isinstance(constructor, dict):
+        for k, v in constructor.items():
+            points = 0
+            for race in v:
+                for j in race.results:
+                    points += j.points
+            constructor_points[k] = {
+                "total_points": points,
+                "constructor_name": v[0].results[0].constructor.name,
+                "drivers": [
+                    v[0].results[0].driver.given_name
+                    + " "
+                    + v[0].results[0].driver.family_name,
+                    v[0].results[1].driver.given_name
+                    + " "
+                    + v[0].results[1].driver.family_name,
+                ],
+            }
+    else:
+        for race in constructor:
+            points = 0
+            for j in race.results:
+                points += j.points
+            constructor_points[race.season] = {
+                "total_points": points,
+                "constructor_name": race.results[0].constructor.name,
+                "drivers": [
+                    race.results[0].driver.given_name
+                    + " "
+                    + race.results[0].driver.family_name,
+                    race.results[1].driver.given_name
+                    + " "
+                    + race.results[1].driver.family_name,
+                ],
+            }
+    return constructor_points
+
+
 @app.get("/", response_class=HTMLResponse)
 async def race_results(req: Request):
     race = ergast_results("season", "round", "get_results")
@@ -128,8 +168,23 @@ async def constructors(req: Request):
 @app.get("/constructors/{constructor_id}", response_class=HTMLResponse)
 async def constructor(req: Request, constructor_id: str):
     constructor_details = ergast_results(
-        "season", ("constructor", (constructor_id,)), "get_constructor_standings"
+        "season", ("constructor", (constructor_id,)), "get_results"
     )
+    past_year_details = {
+        i: ergast_results(
+            ("season", (i,)), ("constructor", (constructor_id,)), "get_results"
+        )
+        for i in last_six_seasons()
+    }
+    past_year_details = total_constructor_points(past_year_details)
+    this_year_details = total_constructor_points(constructor_details)
+    print(this_year_details)
+
     return templates.TemplateResponse(
-        "single-constructor.html", {"request": req, "constructor": constructor_details}
+        "single-constructor.html",
+        {
+            "request": req,
+            "constructor": this_year_details,
+            "past_year": past_year_details,
+        },
     )
