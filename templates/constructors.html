@@ -2,30 +2,30 @@
 {% import "section-header.html" as sh %}
 {% block content %}
 
-{{ sh.section_header("Constructor Standings") }}
+{{ sh.section_header(constructors[-1].season|string + " Constructor Standings") }}
 
-<section class="flex flex-col justify-center">
-    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
-    border-spacing: 12px 3px;">
-        <thead>
-            <tr>
-                <th>Pos</th>
-                <th>Constructor</th>
-                <th>Wins</th>
-                <th>Points</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in constructors[-1].constructor_standings %}
-            <tr>
-                <td>{{d.position}}</td>
-                <td><a
-                        href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">{{d.constructor.name}}</a>
-                </td>
-                <td>{{d.wins}}</td>
-                <td>{{d.points}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% endblock %}
+<div class="table text-xs border border-collapse mx-auto text-left">
+    <div class="table-header-group">
+        <div class="table-row font-bold">
+            <div class="table-cell text-left pl-1 pr-2">Pos</div>
+            <div class="table-cell text-left pl-1 pr-4">Constructor</div>
+            <div class="table-cell text-left pl-1 pr-8">Win</div>
+            <div class="table-cell text-left pl-1 pr-8">Points</div>
+        </div>
+    </div>
+    <div class="table-row-group">
+        {% for d in constructors[-1].constructor_standings %}
+        <div class="table-row">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed">{{d.position}}</div>
+            <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                <a href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">
+                    {{d.constructor.name}}
+                </a>
+            </div>
+            <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.wins}}</div>
+            <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.points|int}}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

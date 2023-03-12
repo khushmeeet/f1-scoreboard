@@ -5,106 +5,122 @@
 {{ sh.section_header(race.race_name + " - Race") }}
 
 <section class="flex flex-col justify-center">
-    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
-    border-spacing: 12px 3px;">
-        <thead>
-            <tr>
-                <th>Pos</th>
-                <th>Driver</th>
-                <th>Constructor</th>
-                <th>Grid Pos</th>
-                <th>Laps</th>
-                <th>Fastest Lap</th>
-                <!-- <th>Interval</th> -->
-                <th>Status</th>
-                <th>Points</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in race.results %}
-            <tr>
-                <td>{{d.position}}</td>
-                <td>
-                    <a href="{{url_for('driver', driver_id=d.driver.driver_id)}}">
-                        {{d.driver.given_name + " " + d.driver.family_name}}
-                    </a>
-                </td>
-                <td><a
-                        href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">{{d.constructor.name}}</a>
-                </td>
-
-                {% if d.grid-d.position < 0 %} <td>{{d.grid}}<span>(↓{{(d.grid-d.position)|abs}})</span>
-                    </td>
-                    {% elif (d.grid-d.position) == 0 %}
-                    <td>{{d.grid}}</td>
-                    {% else %}
-                    <td>{{d.grid}}<span>(↑{{d.grid-d.position}})</span></td>
-                    {% endif %}
-
-                    <td>{{d.laps}}</td>
-
-                    {% if d.fastest_lap.rank == 1 %}
-                    <td>
-                        <span class="bg-green-400">{{d.fastest_lap.time|laptime_format}}</span>
-                    </td>
-                    {% else %}
-                    <td>{{d.fastest_lap.time|laptime_format}}</td>
-                    {% endif %}
-
-                    <!-- <td>{{d.time.time}}</td> -->
-                    <td>{{d.status|race_status}}</td>
-                    <td>{{d.points|int}}</td>
-            </tr>
+    <div>
+        <div class="table text-xs border border-collapse mx-auto text-left">
+            <div class="table-header-group">
+                <div class="table-row font-bold">
+                    <div class="table-cell text-left pl-1 pr-2 ">Pos</div>
+                    <div class="table-cell text-left pl-1 pr-4 ">Driver</div>
+                    <div class="table-cell text-left pl-1 pr-4 ">Constructor</div>
+                    <div class="table-cell text-left pl-1 pr-2 ">Grid Pos</div>
+                    <div class="table-cell text-left pl-1 pr-2 ">Laps</div>
+                    <div class="table-cell text-left pl-1 pr-4 ">Fastest Lap</div>
+                    <div class="table-cell text-left pl-1 pr-4 ">Status</div>
+                    <div class="table-cell text-left pl-1 pr-2 ">Points</div>
+                </div>
+            </div>
+            <div class="table-row-group">
+                {% for d in race.results %}
+                <div class="table-row">
+                    <div class="table-cell pl-1 pr-2  border border-black border-dashed">{{d.position}}</div>
+                    <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                        <a href="{{url_for('driver', driver_id=d.driver.driver_id)}}">
+                            {{d.driver.given_name + " " + d.driver.family_name}}
+                        </a>
+                    </div>
+                    <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                        <a href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">
+                            {{d.constructor.name}}
+                        </a>
+                    </div>
+                    {% if d.grid-d.position < 0 %} <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                        {{d.grid}}<span>(↓{{(d.grid-d.position)|abs}})</span>
+                </div>
+                {% elif (d.grid-d.position) == 0 %}
+                <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                    {{d.grid}}
+                </div>
+                {% else %}
+                <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                    {{d.grid}}<span>(↑{{d.grid-d.position}})</span></td>
+                </div>
+                {% endif %}
+                <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                    {{d.laps}}
+                </div>
+                {% if d.fastest_lap.rank == 1 %}
+                <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                    <span class="bg-green-400">{{d.fastest_lap.time|laptime_format}}</span>
+                </div>
+                {% else %}
+                <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                    {{d.fastest_lap.time|laptime_format}}
+                </div>
+                {% endif %}
+                <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                    {{d.status|race_status}}
+                </div>
+                <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                    {{d.points|int}}
+                </div>
+            </div>
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    </div>
+    </div>
 
     {{ sh.section_header(race.race_name + " - Qualifying") }}
 
-    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
-    border-spacing: 12px 3px;">
-        <thead class="text-left">
-            <tr>
-                <th>Pos</th>
-                <th>Driver</th>
-                <th>Constructor</th>
-                <th>Quali 1</th>
-                <th>Quali 2</th>
-                <th>Quali 3</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in quali.qualifying_results %}
-            <tr>
-                <td>{{d.position}}</td>
-                <td>
-                    <a href="{{url_for('driver', driver_id=d.driver.driver_id)}}">
-                        {{d.driver.given_name + " " + d.driver.family_name}}
-                    </a>
-                </td>
-                <td><a
-                        href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">{{d.constructor.name}}</a>
-                </td>
-                {% if d.qual_1 == None %}
-                <td></td>
-                {% else %}
-                <td>{{d.qual_1|laptime_format}}</td>
-                {% endif %}
+    <div>
+        <div class="table text-xs border border-collapse mx-auto text-left">
+            <div class="table-header-group">
+                <div class="table-row font-bold">
+                    <div class="table-cell text-left pl-1 pr-2">Pos</div>
+                    <div class="table-cell text-left pl-1 pr-4">Driver</div>
+                    <div class="table-cell text-left pl-1 pr-4">Constructor</div>
+                    <div class="table-cell text-left pl-1 pr-8">Quali 1</div>
+                    <div class="table-cell text-left pl-1 pr-8">Quali 2</div>
+                    <div class="table-cell text-left pl-1 pr-8">Quali 3</div>
+                </div>
+            </div>
+            <div class="table-row-group">
+                {% for d in quali.qualifying_results %}
+                <div class="table-row">
+                    <div class="table-cell pl-1 pr-2  border border-black border-dashed">{{d.position}}</div>
+                    <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                        <a href="{{url_for('driver', driver_id=d.driver.driver_id)}}">
+                            {{d.driver.given_name + " " + d.driver.family_name}}
+                        </a>
+                    </div>
+                    <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                        <a href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">
+                            {{d.constructor.name}}
+                        </a>
+                    </div>
+                    {% if d.qual_1 == None %}
+                    <div class="table-cell pl-1 pr-8  border border-black border-dashed"></div>
+                    {% else %}
+                    <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.qual_1|laptime_format}}
+                    </div>
+                    {% endif %}
 
-                {% if d.qual_2 == None %}
-                <td></td>
-                {% else %}
-                <td>{{d.qual_2|laptime_format}}</td>
-                {% endif %}
+                    {% if d.qual_2 == None %}
+                    <div class="table-cell pl-1 pr-8  border border-black border-dashed"></div>
+                    {% else %}
+                    <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.qual_2|laptime_format}}
+                    </div>
+                    {% endif %}
 
-                {% if d.qual_3 == None %}
-                <td></td>
-                {% else %}
-                <td>{{d.qual_3|laptime_format}}</td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    {% if d.qual_3 == None %}
+                    <div class="table-cell pl-1 pr-8  border border-black border-dashed"></div>
+                    {% else %}
+                    <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.qual_3|laptime_format}}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}

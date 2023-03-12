@@ -4,65 +4,68 @@
 
 {{ sh.section_header(schedule.raceTable.season|string + " Season") }}
 
-<section class="flex flex-col justify-center">
-    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
-    border-spacing: 12px 3px;">
-        <thead>
-            <tr>
-                <th>Round</th>
-                <th>Race</th>
-                <th>Circuit</th>
-                <th>FP1</th>
-                <th>FP2</th>
-                <th>FP3</th>
-                <th>Sprint</th>
-                <th>Quali</th>
-                <th>Race</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in schedule.raceTable.races %}
-            <tr>
-                <td>{{d.round}}</td>
-                <td>{{d.raceName}}</td>
-                <td>{{d.circuit.location.locality + ", " + d.circuit.location.country}}</td>
-                {% if d.fp1 %}
-                <td>{{d.fp1.date|combine_date_time(d.fp1.time)|datetime_format("%d-%m-%y %I:%M %p")}}
-                </td>
-                {% else %}
-                <td></td>
-                {% endif %}
+<div class="table text-xs border border-collapse mx-auto text-left">
+    <div class="table-header-group">
+        <div class="table-row font-bold">
+            <div class="table-cell text-left pl-1 pr-2">Round</div>
+            <div class="table-cell text-left pl-1 pr-4">Race</div>
+            <div class="table-cell text-left pl-1 pr-4">Circuit</div>
+            <div class="table-cell text-left pl-1 pr-2">FP1</div>
+            <div class="table-cell text-left pl-1 pr-2">FP2</div>
+            <div class="table-cell text-left pl-1 pr-2">FP3</div>
+            <div class="table-cell text-left pl-1 pr-2">Sprint</div>
+            <div class="table-cell text-left pl-1 pr-2">Quali</div>
+            <div class="table-cell text-left pl-1 pr-2">Race</div>
+        </div>
+    </div>
+    <div class="table-row-group">
+        {% for d in schedule.raceTable.races %}
+        <div class="table-row">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed">{{d.round}}</div>
+            <div class="table-cell pl-1 pr-4  border border-black border-dashed">{{d.raceName}}</div>
+            <div class="table-cell pl-1 pr-4  border border-black border-dashed">{{d.circuit.location.locality + ", " +
+                d.circuit.location.country}}</div>
+            {% if d.fp1 %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                {{d.fp1.date|combine_date_time(d.fp1.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
+            {% else %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            {% endif %}
 
-                {% if d.fp2 %}
-                <td>{{d.fp2.date|combine_date_time(d.fp2.time)|datetime_format("%d-%m-%y %I:%M %p")}}
-                </td>
-                {% else %}
-                <td></td>
-                {% endif %}
+            {% if d.fp2 %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                {{d.fp2.date|combine_date_time(d.fp2.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
+            {% else %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            {% endif %}
 
-                {% if d.fp3 %}
-                <td>{{d.fp3.date|combine_date_time(d.fp3.time)|datetime_format("%d-%m-%y %I:%M %p")}}
-                </td>
-                {% else %}
-                <td></td>
-                {% endif %}
+            {% if d.fp3 %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                {{d.fp3.date|combine_date_time(d.fp3.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
+            {% else %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            {% endif %}
 
-                {% if d.sprint %}
-                <td>{{d.sprint.date|combine_date_time(d.sprint.time)|datetime_format("%d-%m-%y %I:%M
-                    %p")}}</td>
-                {% else %}
-                <td></td>
-                {% endif %}
+            {% if d.sprint %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                {{d.sprint.date|combine_date_time(d.sprint.time)|datetime_format("%d-%m-%y %I:%M
+                %p")}}</div>
+            {% else %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            {% endif %}
 
-                {% if d.quali %}
-                <td>{{d.quali.date|combine_date_time(d.quali.time)|datetime_format("%d-%m-%y %I:%M %p")}}
-                </td>
-                {% else %}
-                <td></td>
-                {% endif %}
-                <td>{{d.date|combine_date_time(d.time)|datetime_format("%d-%m-%y %I:%M %p")}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% endblock %}
+            {% if d.quali %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                {{d.quali.date|combine_date_time(d.quali.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
+            {% else %}
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            {% endif %}
+
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                {{d.date|combine_date_time(d.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
