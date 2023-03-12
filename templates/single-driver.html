@@ -10,7 +10,7 @@ driver[0].results[0].constructor.name) }}
     <pre class="text-xs mx-auto">{{plot}}</pre>
     {% endif %}
 
-    <div class="table text-sm border border-collapse mx-auto text-left">
+    <div class="table table-fixed text-sm border border-collapse mx-auto text-left">
         <div class="table-header-group">
             <div class="table-row font-bold">
                 <div class="table-cell text-left pl-1 pr-3">Round</div>
@@ -42,7 +42,7 @@ driver[0].results[0].constructor.name) }}
                     class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
                     {{d.results[0].points|int}}</div>
 
-                {% if d.results[0].status|race_status != "Finished" %}
+                {% if d.results[0].status|is_failure == True %}
                 <div
                     class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
                     <span class="bg-red-400">{{d.results[0].status|race_status}}</span>
@@ -59,11 +59,12 @@ driver[0].results[0].constructor.name) }}
 
     <div class="grid gap-1 grid-cols-2 grid-rows-2">
         {% for year, values in past_year.items() %}
+        {% if values != [] %}
         <div>
             <section class="text-xl font-bold mt-10 mb-2">
                 <h2>{{year}}</h2>
             </section>
-            <div class="table text-xs border border-collapse">
+            <div class="table table-fixed text-xs border border-collapse">
                 <div class="table-header-group">
                     <div class="table-row font-bold">
                         <div class="table-cell text-left pl-1 pr-3">Round</div>
@@ -105,6 +106,7 @@ driver[0].results[0].constructor.name) }}
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 </section>
