@@ -4,7 +4,7 @@
 
 {{ sh.section_header(drivers[-1].season|string + " Driver Standings") }}
 
-<div class="table text-xs border border-collapse mx-auto text-left">
+<div class="table text-sm border border-collapse mx-auto text-left">
     <div class="table-header-group">
         <div class="table-row font-bold">
             <div class="table-cell text-left pl-1 pr-2">Pos</div>
@@ -17,19 +17,22 @@
     <div class="table-row-group">
         {% for d in drivers[-1].driver_standings %}
         <div class="table-row">
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed">{{d.position}}</div>
-            <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+                {{d.position}}</div>
+            <div class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                 <a href="{{url_for('driver', driver_id=d.driver.driver_id)}}">
                     {{d.driver.given_name + " " + d.driver.family_name}}
                 </a>
             </div>
-            <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+            <div class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                 <a href="{{url_for('constructor', constructor_id=d.constructors[0].constructor_id)}}">
                     {{d.constructors[0].name}}
                 </a>
             </div>
-            <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.wins}}</div>
-            <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.points|int}}</div>
+            <div class="table-cell pl-1 pr-8  border border-black border-dashed dark:border-white dark:border-dotted">
+                {{d.wins}}</div>
+            <div class="table-cell pl-1 pr-8  border border-black border-dashed dark:border-white dark:border-dotted">
+                {{d.points|int}}</div>
         </div>
         {% endfor %}
     </div>

@@ -21,47 +21,55 @@
     <div class="table-row-group">
         {% for d in schedule.raceTable.races %}
         <div class="table-row">
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed">{{d.round}}</div>
-            <div class="table-cell pl-1 pr-4  border border-black border-dashed">{{d.raceName}}</div>
-            <div class="table-cell pl-1 pr-4  border border-black border-dashed">{{d.circuit.location.locality + ", " +
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+                {{d.round}}</div>
+            <div class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
+                {{d.raceName}}</div>
+            <div class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
+                {{d.circuit.location.locality + ", " +
                 d.circuit.location.country}}</div>
             {% if d.fp1 %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                 {{d.fp1.date|combine_date_time(d.fp1.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
             {% else %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+            </div>
             {% endif %}
 
             {% if d.fp2 %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                 {{d.fp2.date|combine_date_time(d.fp2.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
             {% else %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+            </div>
             {% endif %}
 
             {% if d.fp3 %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                 {{d.fp3.date|combine_date_time(d.fp3.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
             {% else %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+            </div>
             {% endif %}
 
             {% if d.sprint %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                 {{d.sprint.date|combine_date_time(d.sprint.time)|datetime_format("%d-%m-%y %I:%M
                 %p")}}</div>
             {% else %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+            </div>
             {% endif %}
 
             {% if d.quali %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                 {{d.quali.date|combine_date_time(d.quali.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
             {% else %}
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed"></div>
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+            </div>
             {% endif %}
 
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                 {{d.date|combine_date_time(d.time)|datetime_format("%d-%m-%y %I:%M %p")}}</div>
         </div>
         {% endfor %}

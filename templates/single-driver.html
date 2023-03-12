@@ -2,38 +2,60 @@
 {% import "section-header.html" as sh %}
 {% block content %}
 
-{{ sh.section_header(driver[0].results[0].driver.given_name + " " + driver[0].results[0].driver.family_name + " | " +
+{{ sh.section_header(driver[0].results[0].driver.given_name + " " + driver[0].results[0].driver.family_name + " - " +
 driver[0].results[0].constructor.name) }}
 
 <section class="flex flex-col justify-center">
     {% if plot != None %}
     <pre class="text-xs mx-auto">{{plot}}</pre>
     {% endif %}
-    <table class="text-xs table-fixed mx-auto text-left" style="border-collapse: separate;
-    border-spacing: 12px 3px;">
-        <thead>
-            <tr>
-                <th>Round</th>
-                <th>Race</th>
-                <th>Date</th>
-                <th>Finished</th>
-                <th>Points</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
+
+    <div class="table text-sm border border-collapse mx-auto text-left">
+        <div class="table-header-group">
+            <div class="table-row font-bold">
+                <div class="table-cell text-left pl-1 pr-3">Round</div>
+                <div class="table-cell text-left pl-1 pr-3">Race</div>
+                <div class="table-cell text-left pl-1 pr-3">Date</div>
+                <div class="table-cell text-left pl-1 pr-3">Finished</div>
+                <div class="table-cell text-left pl-1 pr-3">Points</div>
+                <div class="table-cell text-left pl-1 pr-3">Status</div>
+            </div>
+        </div>
+        <div class="table-row-group">
             {% for d in driver %}
-            <tr>
-                <td>{{d.round_no}}</td>
-                <td>{{d.race_name}}</td>
-                <td>{{d.date|datetime_format("%d-%m-%y %I:%M %p")}}</td>
-                <td>{{d.results[0].position}}</td>
-                <td>{{d.results[0].points|int}}</td>
-                <td>{{d.results[0].status|race_status}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <div class="table-row">
+                <div
+                    class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                    {{d.round_no}}</div>
+                <div
+                    class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                    {{d.race_name}}</div>
+                <div
+                    class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                    {{d.date|datetime_format("%d-%m-%y
+                    %I:%M %p")}}
+                </div>
+                <div
+                    class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                    {{d.results[0].position}}</div>
+                <div
+                    class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                    {{d.results[0].points|int}}</div>
+
+                {% if d.results[0].status|race_status != "Finished" %}
+                <div
+                    class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                    <span class="bg-red-400">{{d.results[0].status|race_status}}</span>
+                </div>
+                {% else %}
+                <div
+                    class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                    {{d.results[0].status|race_status}}</div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
     <div class="grid gap-1 grid-cols-2 grid-rows-2">
         {% for year, values in past_year.items() %}
@@ -54,18 +76,28 @@ driver[0].results[0].constructor.name) }}
                 <div class="table-row-group">
                     {% for d in values %}
                     <div class="table-row">
-                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">{{d.round_no}}</div>
-                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">{{d.race_name}}</div>
-                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">{{d.results[0].position}}
+                        <div
+                            class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                            {{d.round_no}}</div>
+                        <div
+                            class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                            {{d.race_name}}</div>
+                        <div
+                            class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                            {{d.results[0].position}}
                         </div>
-                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">{{d.results[0].points|int}}
+                        <div
+                            class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                            {{d.results[0].points|int}}
                         </div>
                         {% if d.results[0].status|race_status != "Finished" %}
-                        <div class="table-cell pl-1 pr-3 border border-black border-dashed"><span
-                                class="bg-red-500">{{d.results[0].status|race_status}}</span>
+                        <div
+                            class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
+                            <span class="bg-red-400 dark:bg-red-700">{{d.results[0].status|race_status}}</span>
                         </div>
                         {% else %}
-                        <div class="table-cell pl-1 pr-3 border border-black border-dashed">
+                        <div
+                            class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
                             {{d.results[0].status|race_status}}</div>
                         {% endif %}
                     </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="dark">
 
 <head>
     <title>F1 Scoreboard</title>
@@ -10,25 +10,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body class="container mx-24">
+<body class="container mx-24 dark:bg-black dark:text-white">
     <div>
         <header class="flex flex-row text-center mt-2.5">
             <div class="basis-1/4">
             </div>
-            <div class="basis-1/4 text-sm text-slate-700">
+            <div class="basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
                 <a href="{{url_for('race_schedule')}}">Schedule</a>
             </div>
-            <div class="basis-1/4 text-sm text-slate-700">
+            <div class="basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
                 <a href="{{url_for('drivers')}}">Drivers</a>
             </div>
             <div class="basis-1/4 font-bold italic">
                 <a href="{{url_for('race_results')}}">F1</a>
             </div>
-            <div class="basis-1/4 text-sm text-slate-700">
+            <div class="basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
                 <a href="{{url_for('constructors')}}">Constructors</a>
             </div>
-            <div class="basis-1/4 text-sm text-slate-700">
-                {{now|datetime_format}}
+            <div class="basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
+                <button id="toggle-btn">Dark</button>
             </div>
             <div class="basis-1/4">
             </div>
@@ -38,6 +38,17 @@
             {% block content %}{% endblock %}
         </article>
     </div>
+    <script type="text/javascript">
+        const toggleBtn = document.querySelector('#toggle-btn');
+        toggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                toggleBtn.textContent = 'Light';
+            } else {
+                toggleBtn.textContent = 'Dark';
+            }
+        })
+    </script>
 </body>
 
 </html>

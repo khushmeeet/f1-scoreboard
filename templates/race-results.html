@@ -6,7 +6,7 @@
 
 <section class="flex flex-col justify-center">
     <div>
-        <div class="table text-xs border border-collapse mx-auto text-left">
+        <div class="table text-sm border border-collapse mx-auto text-left">
             <div class="table-header-group">
                 <div class="table-row font-bold">
                     <div class="table-cell text-left pl-1 pr-2 ">Pos</div>
@@ -22,45 +22,57 @@
             <div class="table-row-group">
                 {% for d in race.results %}
                 <div class="table-row">
-                    <div class="table-cell pl-1 pr-2  border border-black border-dashed">{{d.position}}</div>
-                    <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                    <div
+                        class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+                        {{d.position}}</div>
+                    <div
+                        class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                         <a href="{{url_for('driver', driver_id=d.driver.driver_id)}}">
                             {{d.driver.given_name + " " + d.driver.family_name}}
                         </a>
                     </div>
-                    <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                    <div
+                        class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                         <a href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">
                             {{d.constructor.name}}
                         </a>
                     </div>
-                    {% if d.grid-d.position < 0 %} <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                    {% if d.grid-d.position < 0 %} <div
+                        class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                         {{d.grid}}<span>(↓{{(d.grid-d.position)|abs}})</span>
                 </div>
                 {% elif (d.grid-d.position) == 0 %}
-                <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                <div
+                    class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                     {{d.grid}}
                 </div>
                 {% else %}
-                <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                <div
+                    class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                     {{d.grid}}<span>(↑{{d.grid-d.position}})</span></td>
                 </div>
                 {% endif %}
-                <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                <div
+                    class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                     {{d.laps}}
                 </div>
                 {% if d.fastest_lap.rank == 1 %}
-                <div class="table-cell pl-1 pr-4  border border-black border-dashed">
-                    <span class="bg-green-400">{{d.fastest_lap.time|laptime_format}}</span>
+                <div
+                    class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
+                    <span class="bg-green-400 dark:bg-green-700">{{d.fastest_lap.time|laptime_format}}</span>
                 </div>
                 {% else %}
-                <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                <div
+                    class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                     {{d.fastest_lap.time|laptime_format}}
                 </div>
                 {% endif %}
-                <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                <div
+                    class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                     {{d.status|race_status}}
                 </div>
-                <div class="table-cell pl-1 pr-2  border border-black border-dashed">
+                <div
+                    class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
                     {{d.points|int}}
                 </div>
             </div>
@@ -72,7 +84,7 @@
     {{ sh.section_header(race.race_name + " - Qualifying") }}
 
     <div>
-        <div class="table text-xs border border-collapse mx-auto text-left">
+        <div class="table text-sm border border-collapse mx-auto text-left">
             <div class="table-header-group">
                 <div class="table-row font-bold">
                     <div class="table-cell text-left pl-1 pr-2">Pos</div>
@@ -86,35 +98,51 @@
             <div class="table-row-group">
                 {% for d in quali.qualifying_results %}
                 <div class="table-row">
-                    <div class="table-cell pl-1 pr-2  border border-black border-dashed">{{d.position}}</div>
-                    <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                    <div
+                        class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+                        {{d.position}}</div>
+                    <div
+                        class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                         <a href="{{url_for('driver', driver_id=d.driver.driver_id)}}">
                             {{d.driver.given_name + " " + d.driver.family_name}}
                         </a>
                     </div>
-                    <div class="table-cell pl-1 pr-4  border border-black border-dashed">
+                    <div
+                        class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                         <a href="{{url_for('constructor', constructor_id=d.constructor.constructor_id)}}">
                             {{d.constructor.name}}
                         </a>
                     </div>
                     {% if d.qual_1 == None %}
-                    <div class="table-cell pl-1 pr-8  border border-black border-dashed"></div>
+                    <div
+                        class="table-cell pl-1 pr-8  border border-black border-dashed dark:border-white dark:border-dotted">
+                    </div>
                     {% else %}
-                    <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.qual_1|laptime_format}}
+                    <div
+                        class="table-cell pl-1 pr-8  border border-black border-dashed dark:border-white dark:border-dotted">
+                        {{d.qual_1|laptime_format}}
                     </div>
                     {% endif %}
 
                     {% if d.qual_2 == None %}
-                    <div class="table-cell pl-1 pr-8  border border-black border-dashed"></div>
+                    <div
+                        class="table-cell pl-1 pr-8  border border-black border-dashed dark:border-white dark:border-dotted">
+                    </div>
                     {% else %}
-                    <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.qual_2|laptime_format}}
+                    <div
+                        class="table-cell pl-1 pr-8  border border-black border-dashed dark:border-white dark:border-dotted">
+                        {{d.qual_2|laptime_format}}
                     </div>
                     {% endif %}
 
                     {% if d.qual_3 == None %}
-                    <div class="table-cell pl-1 pr-8  border border-black border-dashed"></div>
+                    <div
+                        class="table-cell pl-1 pr-8  border border-black border-dashed dark:border-white dark:border-dotted">
+                    </div>
                     {% else %}
-                    <div class="table-cell pl-1 pr-8  border border-black border-dashed">{{d.qual_3|laptime_format}}
+                    <div
+                        class="table-cell pl-1 pr-8  border border-black border-dashed dark:border-white dark:border-dotted">
+                        {{d.qual_3|laptime_format}}
                     </div>
                     {% endif %}
                 </div>
