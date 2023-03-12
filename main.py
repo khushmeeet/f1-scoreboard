@@ -70,22 +70,23 @@ def total_constructor_points(constructor):
     constructor_points = {}
     if isinstance(constructor, dict):
         for k, v in constructor.items():
-            points = 0
-            for race in v:
-                for j in race.results:
-                    points += j.points
-            constructor_points[k] = {
-                "total_points": points,
-                "constructor_name": v[0].results[0].constructor.name,
-                "drivers": [
-                    v[0].results[0].driver.given_name
-                    + " "
-                    + v[0].results[0].driver.family_name,
-                    v[0].results[1].driver.given_name
-                    + " "
-                    + v[0].results[1].driver.family_name,
-                ],
-            }
+            if v != []:
+                points = 0
+                for race in v:
+                    for j in race.results:
+                        points += j.points
+                constructor_points[k] = {
+                    "total_points": points,
+                    "constructor_name": v[0].results[0].constructor.name,
+                    "drivers": [
+                        v[0].results[0].driver.given_name
+                        + " "
+                        + v[0].results[0].driver.family_name,
+                        v[0].results[1].driver.given_name
+                        + " "
+                        + v[0].results[1].driver.family_name,
+                    ],
+                }
     else:
         for race in constructor:
             points = 0
