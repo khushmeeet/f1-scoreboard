@@ -90,7 +90,7 @@ driver[0].results[0].constructor.name) }}
                             class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
                             {{d.results[0].points|int}}
                         </div>
-                        {% if d.results[0].status|race_status != "Finished" %}
+                        {% if d.results[0].status|is_failure == True %}
                         <div
                             class="table-cell pl-1 pr-3 border border-black border-dashed dark:border-white dark:border-dotted">
                             <span class="bg-red-400 dark:bg-red-700">{{d.results[0].status|race_status}}</span>

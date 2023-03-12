@@ -8,7 +8,13 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from httpx_client import HTTPXClient
-from filters import datetime_format, laptime_format, race_status_str, combine_date_time
+from filters import (
+    datetime_format,
+    laptime_format,
+    race_status_str,
+    combine_date_time,
+    is_failure,
+)
 from utils import get_schedule
 import asciichartpy
 
@@ -27,6 +33,7 @@ templates.env.filters["datetime_format"] = datetime_format
 templates.env.filters["laptime_format"] = laptime_format
 templates.env.filters["race_status"] = race_status_str
 templates.env.filters["combine_date_time"] = combine_date_time
+templates.env.filters["is_failure"] = is_failure
 
 e = ergast_py.Ergast()
 client = HTTPXClient()
