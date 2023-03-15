@@ -1,6 +1,4 @@
-{% extends "base.html" %}
 {% import "section-header.html" as sh %}
-{% block content %}
 
 {{ sh.section_header(drivers[-1].season|string + " Driver Standings") }}
 
@@ -37,4 +35,3 @@
         {% endfor %}
     </div>
 </div>
-{% endblock %}

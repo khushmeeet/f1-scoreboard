@@ -132,6 +132,6 @@ dmypy.json
 .DS_Store
 
 #project
-static/fonts
 node_modules/
 cache/
+static/fonts

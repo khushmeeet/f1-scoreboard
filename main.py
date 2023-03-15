@@ -179,7 +179,6 @@ async def constructor(req: Request, constructor_id: str):
     }
     past_year_details = total_constructor_points(past_year_details)
     this_year_details = total_constructor_points(constructor_details)
-    print(this_year_details)
 
     return templates.TemplateResponse(
         "single-constructor.html",

@@ -5,9 +5,13 @@
     <title>F1 Scoreboard</title>
     <meta charset="UTF-8">
     <!-- Temporary solution -->
-    <!-- <link href="{{url_for('static', path='style.css')}}" rel="stylesheet"> -->
-    <link href="https://f1-scoreboard.fly.dev/static/style.css" rel="stylesheet">
+    <link href="{{url_for('static', path='style.css')}}" rel="stylesheet">
+    <!-- <link href="https://f1-scoreboard.fly.dev/static/style.css" rel="stylesheet"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/htmx.org@1.8.6"
+        integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.8"></script>
 </head>
 
 <body class="container mx-24 dark:bg-black dark:text-white">
@@ -16,38 +20,40 @@
             <div class="basis-1/4">
             </div>
             <div class="basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
-                <a href="{{url_for('race_schedule')}}">Schedule</a>
+                <a hx-get="/schedule" hx-trigger="click" hx-target="#f1" hx-swap="innerHTML">Schedule</a>
             </div>
             <div class="basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
-                <a href="{{url_for('drivers')}}">Drivers</a>
+                <a hx-get="/drivers" hx-trigger="click" hx-target="#f1" hx-swap="innerHTML">Drivers</a>
             </div>
-            <div class="basis-1/4 font-bold italic">
-                <a href="{{url_for('race_results')}}">F1</a>
+            <div class=" basis-1/4 font-bold italic">
+                <a hx-get="/" hx-trigger="click" hx-target="#f1" hx-swap="innerHTML">F1</a>
             </div>
-            <div class="basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
-                <a href="{{url_for('constructors')}}">Constructors</a>
+            <div class=" basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
+                <a hx-get="/constructors" hx-trigger="click" hx-target="#f1" hx-swap="innerHTML">Constructors</a>
             </div>
-            <div class="basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
-                <button id="toggle-btn">Dark</button>
+            <div class=" basis-1/4 text-sm text-slate-700 dark:text-indigo-700">
+                <button id="toggle-btn" _="on click toggle .dark on <html/> 
+                       on click if my innerHTML == 'Dark' 
+                            put 'Light' into me localStorage.theme='dark' otherwise 
+                            put 'Dark' into me localStoreage.theme='light">Dark</button>
             </div>
             <div class="basis-1/4">
             </div>
         </header>
         <hr class="border border-black border-dashed w-3/4 m-auto">
-        <article>
+        <article id="f1">
             {% block content %}{% endblock %}
         </article>
     </div>
-    <script type="text/javascript">
-        const toggleBtn = document.querySelector('#toggle-btn');
-        toggleBtn.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            if (document.documentElement.classList.contains('dark')) {
-                toggleBtn.textContent = 'Light';
+    <script type="text/hyperscript">
+        on load
+        js 
+            if localStorage.theme === 'dark' || !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches {
+                document.documentElement.classList.add('dark')
             } else {
-                toggleBtn.textContent = 'Dark';
+            document.documentElement.classList.remove('dark')
             }
-        })
+        end
     </script>
 </body>
 

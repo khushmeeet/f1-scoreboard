@@ -1,27 +1,25 @@
-{% extends "base.html" %}
 {% import "section-header.html" as sh %}
-{% block content %}
 
 {{ sh.section_header(schedule.raceTable.season|string + " Season") }}
 
-<div class="table text-xs border border-collapse mx-auto text-left">
+<div class="table text-sm border border-collapse mx-auto text-left">
     <div class="table-header-group">
         <div class="table-row font-bold">
-            <div class="table-cell text-left pl-1 pr-2">Round</div>
-            <div class="table-cell text-left pl-1 pr-4">Race</div>
-            <div class="table-cell text-left pl-1 pr-4">Circuit</div>
-            <div class="table-cell text-left pl-1 pr-2">FP1</div>
-            <div class="table-cell text-left pl-1 pr-2">FP2</div>
-            <div class="table-cell text-left pl-1 pr-2">FP3</div>
-            <div class="table-cell text-left pl-1 pr-2">Sprint</div>
-            <div class="table-cell text-left pl-1 pr-2">Quali</div>
-            <div class="table-cell text-left pl-1 pr-2">Race</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-1">Round</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-4">Race</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-4">Circuit</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-2">FP1</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-2">FP2</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-2">FP3</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-2">Sprint</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-2">Quali</div>
+            <div class="table-cell text-left text-slate-700 pl-1 pr-2">Race</div>
         </div>
     </div>
-    <div class="table-row-group">
+    <div class="table-row-group text-slate-700">
         {% for d in schedule.raceTable.races %}
         <div class="table-row">
-            <div class="table-cell pl-1 pr-2  border border-black border-dashed dark:border-white dark:border-dotted">
+            <div class="table-cell pl-1 pr-1  border border-black border-dashed dark:border-white dark:border-dotted">
                 {{d.round}}</div>
             <div class="table-cell pl-1 pr-4  border border-black border-dashed dark:border-white dark:border-dotted">
                 {{d.raceName}}</div>
@@ -75,5 +73,3 @@
         {% endfor %}
     </div>
 </div>
-
-{% endblock %}

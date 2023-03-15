@@ -1,6 +1,4 @@
-{% extends "base.html" %}
 {% import "section-header.html" as sh %}
-{% block content %}
 
 {{ sh.section_header(constructors[-1].season|string + " Constructor Standings") }}
 
@@ -31,4 +29,3 @@
         {% endfor %}
     </div>
 </div>
-{% endblock %}

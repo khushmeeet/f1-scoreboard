@@ -4,10 +4,12 @@
 
 @font-face {
     font-family: "Berkley Mono";
-    src: url("fonts/BerkeleyMono-Bold.ttf");
-    src: url("fonts/BerkeleyMono-BoldItalic.ttf");
-    src: url("fonts/BerkeleyMono-Italic.ttf");
-    src: url("fonts/BerkeleyMono-Regular.ttf");
+    src: url("./fonts/BerkeleyMono-Bold.woff2") format("woff2");
+    src: url("./fonts/BerkeleyMono-BoldItalic.woff2") format("woff2");
+    src: url("./fonts/BerkeleyMono-Italic.woff2") format("woff2");
+    src: url("./fonts/BerkeleyMono-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
 }
 
 @layer base {
